@@ -1,0 +1,10 @@
+<resources>
+    <color name="bg">#07110E</color>
+    <color name="surface">#101C18</color>
+    <color name="surface_2">#15251F</color>
+    <color name="stroke">#213A31</color>
+    <color name="green">#54E7A5</color>
+    <color name="green_soft">#1C3B30</color>
+    <color name="text_primary">#F4FFF9</color>
+    <color name="text_secondary">#90A79D</color>
+</resources>
