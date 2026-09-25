@@ -1,0 +1,38 @@
+name: Gerar APK VMB Music
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Baixar código
+        uses: actions/checkout@v4
+
+      - name: Configurar Java 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+
+      - name: Configurar Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Instalar Gradle
+        uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: 8.11.1
+
+      - name: Gerar APK
+        run: gradle assembleDebug
+
+      - name: Renomear APK
+        run: cp app/build/outputs/apk/debug/app-debug.apk VMB-Music.apk
+
+      - name: Enviar APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: VMB-Music-APK
+          path: VMB-Music.apk
