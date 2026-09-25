@@ -22,15 +22,17 @@ jobs:
         with:
           gradle-version: 8.11.1
 
-      - name: Verificar Android SDK
+      - name: Mostrar Android SDK
         run: |
           echo "ANDROID_HOME=$ANDROID_HOME"
-          sdkmanager --list | head -50
+          ls -la "$ANDROID_HOME/cmdline-tools"
+          ls -la "$ANDROID_HOME/cmdline-tools/latest/bin"
 
       - name: Instalar Android SDK necessário
         run: |
-          yes | sdkmanager --licenses || true
-          sdkmanager "platform-tools" "platforms;android-37" "build-tools;36.0.0"
+          SDKMANAGER="$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager"
+          yes | "$SDKMANAGER" --licenses || true
+          "$SDKMANAGER" "platform-tools" "platforms;android-37" "build-tools;36.0.0"
 
       - name: Gerar APK
         run: gradle assembleDebug --stacktrace
